@@ -6,12 +6,13 @@ using UnityEngine;
 public class GameStatusMediator : Mediator
 {
   [Inject]
-  public GameStatusView gameStatusView {get; set;}
+  public GameStatusView gameStatusView { get; set; }
+
   [Inject]
   public GameStatusChangedSignal gameStatusChangedSignal { get; set; }
+
   public override void OnRegister()
   {
-    Debug.Log("Register gamestatus");
     gameStatusChangedSignal.AddListener(gameStatusView.UpdateScore);
   }
 }

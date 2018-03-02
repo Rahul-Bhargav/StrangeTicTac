@@ -21,7 +21,7 @@ public class AreaClickedCommand : Command
   public override void Execute()
   {
     manager.OnAreaClicked(clickedIndex);
-    gameStatusChangedSignal.Dispatch(manager.GetGameStatus());
+    gameStatusChangedSignal.Dispatch(manager.GetGameStatus(), manager.GetIsGameOver());
     currentMarkChangedSignal.Dispatch(manager.GetCurrentMark());
   }
 }

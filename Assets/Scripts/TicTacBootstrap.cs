@@ -9,6 +9,7 @@ public class TicTacBootstrap : ContextView
   /// </summary>
   void Awake()
   {
-    this.context = new TicTacContext(this);
+    this.context = TicTacContext.GetTicTacContext(this);
+    // DontDestroyOnLoad(this.transform);
   }
 }

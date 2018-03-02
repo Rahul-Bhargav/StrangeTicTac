@@ -17,28 +17,37 @@ public class ClickAreaView : View
   public Signal<string> areaClicked = new Signal<string>();
 
   private bool isClicked = false;
-  void Start()
+
+  private bool isGameOver = false;
+
+  protected override void Start()
   {
+    base.Start();
     currentMark = GameConstants.DEFAULT_MARK;
   }
 
   public void onClick(string clickedIndex)
   {
-    if (isClicked)
+    if (isClicked || isGameOver)
       return;
 
     Text markObject = null;
     switch (currentMark)
     {
       case "x":
-        markObject = GameObject.Instantiate(xObj, this.gameObject.transform.position, Quaternion.identity);
+        markObject = GameObject.Instantiate(xObj, Vector3.zero, Quaternion.identity);
         break;
       case "o":
-        markObject = GameObject.Instantiate(oObj, this.gameObject.transform.position, Quaternion.identity);
+        markObject = GameObject.Instantiate(oObj, Vector3.zero, Quaternion.identity);
         break;
     }
     markObject.transform.parent = this.transform;
+    markObject.rectTransform.localPosition = Vector3.zero;
     areaClicked.Dispatch(clickedIndex);
     isClicked = true;
+  }
+
+  public void SetGameOver(string gameStatus, bool isGameOverFlag) {
+    isGameOver = isGameOverFlag;
   }
 }

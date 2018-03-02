@@ -9,7 +9,7 @@ public class GameStatusView : View
 
   public Text gameStatusText;
 
-  public void UpdateScore(string status)
+  public void UpdateScore(string status, bool isGameOver)
   {
     gameStatusText.text = status;
   }

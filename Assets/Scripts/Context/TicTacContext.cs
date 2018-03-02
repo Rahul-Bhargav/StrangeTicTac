@@ -8,7 +8,15 @@ using strange.extensions.signal.impl;
 
 public class TicTacContext : MVCSContext
 {
+  static TicTacContext context;
 
+  public static TicTacContext GetTicTacContext(MonoBehaviour view)
+  {
+    if (context == null)
+      return new TicTacContext(view);
+
+    return context;
+  }
   public TicTacContext(MonoBehaviour view) : base(view)
   { }
 
@@ -27,9 +35,7 @@ public class TicTacContext : MVCSContext
     mediationBinder.Bind<ClickAreaView>().To<ClickAreaMediator>();
     mediationBinder.Bind<GameStatusView>().To<GameStatusMediator>();
 
-    GameObject gameManagerObject = GameObject.Find("GameManager");
-    IGameManager gameManager = gameManagerObject.GetComponent<IGameManager>();
-    injectionBinder.Bind<IGameManager>().ToValue(gameManager);
+    injectionBinder.Bind<IGameManager>().To<GameManager>().ToSingleton();
 
   }
 
